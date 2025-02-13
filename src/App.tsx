@@ -1,9 +1,9 @@
 import { useState } from "react"
 import "./index.css"
 import emailjs from "emailjs-com"
-// const SERVICE_ID = import.meta.env.VITE_SERVICE_ID
-// const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID
-// const PUBLIC_ID = import.meta.env.VITE_PUBLIC_ID
+const SERVICE_ID = import.meta.env.VITE_SERVICE_ID
+const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID
+const PUBLIC_ID = import.meta.env.VITE_PUBLIC_ID
 
 function App() {
   const [name, setName] = useState("")
@@ -21,24 +21,17 @@ function App() {
       message,
     }
 
-    emailjs
-      .send(
-        "*****",
-        "*******",
-        templateParams,
-        "********"
-      )
-      .then(
-        (response) => {
-          alert(`${response.status} ${response.text}`)
-          console.log("SUCCESS!", response.status, response.text)
-        },
-        (error) => {
-          alert(`${error.text}`)
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_ID).then(
+      (response) => {
+        alert(`${response.status} ${response.text}`)
+        console.log("SUCCESS!", response.status, response.text)
+      },
+      (error) => {
+        alert(`${error.text}`)
 
-          console.log("FAILED...", error)
-        }
-      )
+        console.log("FAILED...", error)
+      }
+    )
   }
   return (
     <div className="bg-green-950/90 w-full h-screen flex flex-col items-center justify-center">
